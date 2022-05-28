@@ -5,7 +5,9 @@ const app = express()
 const port = 3000
 
 app.post("/notifications", (request, response) => {
-    console.log("requet", request.body)
+    // @ts-ignore
+    const payload = JSON.parse(request)
+    console.log("request", payload)
 })
 
 app.listen(port, () => {
