@@ -29,6 +29,8 @@ app.post("/notifications", (request, response) => {
             body
         }
 
+        console.log("payload", payload)
+
         client.on("ready", message => {
 
             // @ts-ignore
