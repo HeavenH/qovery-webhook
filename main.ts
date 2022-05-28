@@ -7,8 +7,20 @@ app.use(express.json())
 const port = 3000
 
 app.post("/notifications", (request, response) => {
-    // @ts-ignore
-    console.log("request", request.body.request)
+
+    if (request.body.action == "created") {
+        // @ts-ignore
+        let html_url = request.body.release.html_url
+        let release_name = request.body.release.name
+        let body = request.body.release.body
+
+        const payload = {
+            release_name,
+            html_url,
+            body
+        }
+        console.log("payload", payload)
+    }
 
     response.json({ok: true})
 })
