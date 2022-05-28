@@ -32,7 +32,7 @@ app.post("/notifications", (request, response) => {
         client.on("ready", message => {
 
             // @ts-ignore
-            client.channels.fetch('980083024672718939').then(channel=>channel.send(payload))
+            client.channels.fetch('980083024672718939').then(channel=>channel.send(JSON.stringify(payload)))
         })
 
     }
