@@ -2,12 +2,15 @@ import express from "express";
 
 const app = express()
 
+app.use(express.json())
+
 const port = 3000
 
 app.post("/notifications", (request, response) => {
     // @ts-ignore
-    const payload = JSON.parse(request)
-    console.log("request", payload)
+    console.log("request", request.body)
+
+    response.json({ok: true})
 })
 
 app.listen(port, () => {
