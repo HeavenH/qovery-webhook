@@ -4,7 +4,7 @@
   "description": "a bot release change logs github",
   "main": "index.js",
   "scripts": {
-    "start": "npx tsc main.ts"
+    "deploy:prod": "node dist/main.js"
   },
   "keywords": [],
   "author": "Gilmar Silva",
