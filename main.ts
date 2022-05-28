@@ -8,7 +8,7 @@ const port = 3000
 
 app.post("/notifications", (request, response) => {
     // @ts-ignore
-    console.log("request", request.body)
+    console.log("request", request.body.request)
 
     response.json({ok: true})
 })
