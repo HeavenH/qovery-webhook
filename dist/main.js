@@ -14,13 +14,10 @@ const client = new discord_js_1.Client({
 client.login(process.env.TOKEN_BOT);
 app.use(express_1.default.json());
 const port = 3000;
+console.log("env", process.env.TOKEN_BOT);
 client.on("ready", message => {
-    const payload = {
-        html_url: "oi",
-        release_name: "fix"
-    };
     // @ts-ignore
-    client.channels.fetch('980083024672718939').then(channel => channel.send(JSON.stringify(payload)));
+    client.channels.fetch('980083024672718939').then(channel => channel.send(JSON.stringify("payload")));
 });
 app.post("/notifications", (request, response) => {
     if (request.body.action == "created") {
@@ -33,9 +30,10 @@ app.post("/notifications", (request, response) => {
             html_url,
             body
         };
+        console.log("payload", payload);
         client.on("ready", message => {
             // @ts-ignore
-            client.channels.fetch('980083024672718939').then(channel => channel.send(payload));
+            client.channels.fetch('980083024672718939').then(channel => channel.send(JSON.stringify("payload")));
         });
     }
     response.json({ ok: true });

@@ -15,6 +15,14 @@ app.use(express.json())
 
 const port = 3000
 
+console.log("env", process.env.TOKEN_BOT)
+
+client.on("ready", message => {
+
+    // @ts-ignore
+    client.channels.fetch('980083024672718939').then(channel=>channel.send(JSON.stringify("payload")))
+})
+
 app.post("/notifications", (request, response) => {
 
     if (request.body.action == "created") {
