@@ -5,26 +5,15 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const app = express()
+app.use(express.json())
+
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 
-client.login(process.env.TOKEN_BOT)
-
-app.use(express.json())
-
 const port = 3000
 
-console.log("env", process.env.TOKEN_BOT)
-
-client.on("ready", message => {
-
-    // @ts-ignore
-    client.channels.fetch('980083024672718939').then(channel=>channel.send(JSON.stringify("payload")))
-})
-
 app.post("/notifications", (request, response) => {
-
     if (request.body.action == "created") {
         // @ts-ignore
         let html_url = request.body.release.html_url
@@ -38,12 +27,6 @@ app.post("/notifications", (request, response) => {
         }
 
         console.log("payload", payload)
-
-        client.on("ready", message => {
-
-            // @ts-ignore
-            client.channels.fetch('980083024672718939').then(channel=>channel.send(JSON.stringify("payload")))
-        })
 
     }
 

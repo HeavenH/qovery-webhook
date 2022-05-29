@@ -8,18 +8,19 @@ const discord_js_1 = require("discord.js");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
+app.use(express_1.default.json());
 const client = new discord_js_1.Client({
     intents: [discord_js_1.Intents.FLAGS.GUILDS, discord_js_1.Intents.FLAGS.GUILD_MESSAGES]
 });
-client.login(process.env.TOKEN_BOT);
-app.use(express_1.default.json());
 const port = 3000;
-console.log("env", process.env.TOKEN_BOT);
-client.on("ready", message => {
-    // @ts-ignore
-    client.channels.fetch('980083024672718939').then(channel => channel.send(JSON.stringify("payload")));
-});
 app.post("/notifications", (request, response) => {
+    client.login(process.env.TOKEN_BOT);
+    client.on("ready", message => {
+        const channel = client.channels.cache.get('980083024672718939');
+        // @ts-ignore
+        channel.send({ content: 'This is a message' });
+    });
+    console.log("oi");
     if (request.body.action == "created") {
         // @ts-ignore
         let html_url = request.body.release.html_url;
@@ -31,10 +32,6 @@ app.post("/notifications", (request, response) => {
             body
         };
         console.log("payload", payload);
-        client.on("ready", message => {
-            // @ts-ignore
-            client.channels.fetch('980083024672718939').then(channel => channel.send(JSON.stringify("payload")));
-        });
     }
     response.json({ ok: true });
 });
