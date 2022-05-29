@@ -29,7 +29,7 @@ app.post("/notifications", async (request, response) => {
 
         const optionsEmbed = embedConfig(payload)
 
-        await channel.send({ embeds: [optionsEmbed]});
+        await channel.send("ok");
     }
 
     response.json({ ok: true })
