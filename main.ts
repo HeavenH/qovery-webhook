@@ -11,9 +11,15 @@ const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 
+client.login(process.env.TOKEN_BOT)
+
 const port = 3000
 
-app.post("/notifications", (request, response) => {
+app.post("/notifications", async (request, response) => {
+
+    const channel = client.channels.cache.get('980083024672718939');
+
+
     if (request.body.action == "created") {
         // @ts-ignore
         let html_url = request.body.release.html_url
@@ -26,8 +32,8 @@ app.post("/notifications", (request, response) => {
             body
         }
 
-        console.log("payload", payload)
-
+        // @ts-ignore
+        channel.send(JSON.stringify(payload));
     }
 
     response.json({ok: true})
