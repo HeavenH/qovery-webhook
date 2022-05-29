@@ -10,6 +10,8 @@ COPY . .
 
 RUN npm install
 
+RUN rm -rf dist
+
 RUN npx tsc
 
 EXPOSE 3000

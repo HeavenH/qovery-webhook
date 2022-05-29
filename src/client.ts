@@ -9,6 +9,6 @@ export class WebhookClient extends Client {
     }
 
     async init() {
-        await this.login(process.env.bot_token)
+        await this.login(process.env.BOT_TOKEN)
     }
 }
