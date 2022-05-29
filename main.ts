@@ -26,22 +26,27 @@ app.post("/notifications", async (request, response) => {
         let html_url = request.body.release.html_url
         let release_name = request.body.release.name
         let body = request.body.release.body
+        let tag_name = request.body.release.tag_name
+        let avatar_url = request.body.release.author.avatar_url
 
         const payload = {
             release_name,
             html_url,
-            body
+            body,
+            tag_name,
+            avatar_url
         }
 
         const formatedPayload = new MessageEmbed()
             // @ts-ignore
             .setColor('0099ff')
+            .setTimestamp(new Date())
             .setURL(payload.html_url)
             .setDescription(payload.body)
             .setTitle(payload.release_name)
-            .setThumbnail("https://e3ba6e8732e83984.cdn.gocache.net/uploads/image/file/72484/regular_conta-azul.png")
+            .setThumbnail(payload.avatar_url)
             .setImage("https://e3ba6e8732e83984.cdn.gocache.net/uploads/image/file/72484/regular_conta-azul.png")
-            .addFields()
+            .setAuthor(payload.tag_name)
         // @ts-ignore
         channel.send({ embeds: [formatedPayload]});
     }
