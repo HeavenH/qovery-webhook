@@ -47,6 +47,8 @@ app.post("/notifications", async (request, response) => {
             .setThumbnail(payload.avatar_url)
             .setImage("https://e3ba6e8732e83984.cdn.gocache.net/uploads/image/file/72484/regular_conta-azul.png")
             .setAuthor(payload.tag_name)
+            .setFooter("\u3000".repeat(10/*any big number works too*/)+"|")
+
         // @ts-ignore
         channel.send({ embeds: [formatedPayload]});
     }
