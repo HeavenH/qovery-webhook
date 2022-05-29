@@ -25,9 +25,21 @@ client.login(process.env.TOKEN_BOT);
 const port = 3000;
 app.post("/notifications", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const channel = client.channels.cache.get('980083024672718939');
+    const payload = {
+        html_url: "https://discordjs.guide/popular-topics/embeds.html#using-the-embed-constructor",
+        body: "daspdosakdsao" +
+            "32013210321o0 \n" +
+            "3210321o0321o1",
+        release_name: "Kafka refactor"
+    };
+    const formatedPayload = new discord_js_1.MessageEmbed()
+        // @ts-ignore
+        .setColor('0099ff')
+        .setURL(payload.html_url)
+        .setDescription(payload.body)
+        .setTitle(payload.release_name);
     // @ts-ignore
-    channel.send({ content: 'This is a message' });
-    console.log("oi");
+    channel.send({ embeds: [formatedPayload] });
     if (request.body.action == "created") {
         // @ts-ignore
         let html_url = request.body.release.html_url;
@@ -38,7 +50,10 @@ app.post("/notifications", (request, response) => __awaiter(void 0, void 0, void
             html_url,
             body
         };
-        console.log("payload", payload);
+        // @ts-ignore
+        const formatedPayload = new discord_js_1.MessageEmbed().setColor('0099ff').setURL(payload.html_url).setDescription(payload.body);
+        // @ts-ignore
+        channel.send({ embeds: [formatedPayload] });
     }
     response.json({ ok: true });
 }));

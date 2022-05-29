@@ -1,5 +1,5 @@
 import express from "express";
-import { Client, Intents, TextChannel } from "discord.js";
+import { Client, Intents, TextChannel, MessageEmbed } from "discord.js";
 import dotenv from "dotenv"
 
 dotenv.config()
@@ -19,7 +19,6 @@ app.post("/notifications", async (request, response) => {
 
     const channel = client.channels.cache.get('980083024672718939');
 
-
     if (request.body.action == "created") {
         // @ts-ignore
         let html_url = request.body.release.html_url
@@ -32,8 +31,14 @@ app.post("/notifications", async (request, response) => {
             body
         }
 
+        const formatedPayload = new MessageEmbed()
+            // @ts-ignore
+            .setColor('0099ff')
+            .setURL(payload.html_url)
+            .setDescription(payload.body)
+            .setTitle(payload.release_name)
         // @ts-ignore
-        channel.send(JSON.stringify(payload));
+        channel.send({ embeds: [formatedPayload]});
     }
 
     response.json({ok: true})
