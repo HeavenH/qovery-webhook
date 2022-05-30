@@ -8,7 +8,7 @@ export class WebhookClient extends Client {
         super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
     }
 
-    async init() {
-        await this.login(process.env.BOT_TOKEN)
+    init() {
+        this.login(process.env.BOT_TOKEN)
     }
 }

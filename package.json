@@ -4,7 +4,7 @@
   "description": "a bot release change logs github",
   "main": "index.js",
   "scripts": {
-    "start": "npx tsc && node dist/src/main.js",
+    "start": "npx tsc && node dist/main.js",
     "deploy:prod": "node dist/main.js"
   },
   "keywords": [],

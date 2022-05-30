@@ -1,22 +1,22 @@
 import express from "express";
-import { TextChannel } from "discord.js";
-import { WebhookClient } from "./client";
-import { embedConfig } from "./embed";
+import dotenv from "dotenv"
+import {WebhookClient} from "./src/client";
+import {embedConfig} from "./src/embed";
+
+dotenv.config()
 
 const app = express()
-
 app.use(express.json())
+
+const client = new WebhookClient();
+
+client.login(process.env.BOT_TOKEN)
 
 const port = 3000
 
 app.post("/notifications", async (request, response) => {
-    const clientWebhook = new WebhookClient()
 
-    await clientWebhook.init()
-
-    const channel = clientWebhook.channels.cache.get('980083024672718939') as TextChannel;
-
-    await channel.send("class refactor");
+    const channel = client.channels.cache.get('980083024672718939');
 
     if (request.body.action == "created") {
         const payload = {
@@ -29,10 +29,13 @@ app.post("/notifications", async (request, response) => {
 
         const optionsEmbed = embedConfig(payload)
 
-        await channel.send("ok");
+        console.log("embed", optionsEmbed)
+
+        //@ts-ignore
+        channel.send("ok");
     }
 
-    response.json({ ok: true })
+    response.json({ok: true})
 })
 
 app.listen(port, () => {
