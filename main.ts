@@ -32,7 +32,7 @@ app.post("/notifications", async (request, response) => {
         console.log("embed", optionsEmbed)
 
         //@ts-ignore
-        channel.send("ok");
+        channel.send({ embeds: [optionsEmbed] });
     }
 
     response.json({ok: true})
