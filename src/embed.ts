@@ -9,14 +9,17 @@ export const embedConfig = (payload: WebhookPayload): MessageEmbedOptions => {
             url: payload.html_url
         },
         url: payload.html_url,
-        color: 'AQUA',
+        color: 'BLUE',
         thumbnail: {
             url: 'https://e3ba6e8732e83984.cdn.gocache.net/uploads/image/file/72484/regular_conta-azul.png',
-            width: 120,
-            height: 120
+            width: 420,
+            height: 420
         },
         description: payload.body,
         timestamp: new Date(),
-        title: payload.release_name
+        title: payload.release_name,
+        footer: {
+            text: "\u3000\Uma nova versão do swp-common está disponivel"
+        }
     }
 }
